@@ -107,11 +107,11 @@ function Todotemplate() {
 
   const todoitems = [
     {id:1, state:false, title:"리액트 공부하기(1)", innerTxt:"리액트 기초를 공부해봅시다."},
-    {id:2, state:false, title:"리액트 공부하기(2)", innerTxt:"리액트 컴포넌트를 공부해봅시다."},
-    {id:3, state:false, title:"리액트 공부하기(3)", innerTxt:"리액트 프롭스를 공부해봅시다."},
-    {id:4, state:false, title:"리액트 공부하기(4)", innerTxt:"리액트 훅(1) useState를 공부해봅시다."},]
+  ]
   
-  const [todoitem, setTodoitem] = useState(todoitems)
+  const [todoitem, setTodoitem] = useState(todoitems);
+  const [title, setTitle] = useState('');
+  const [innerTxt, setInnerTxt] = useState('');
 
   // 오늘안 사실을 리액트에서는 시간도 useState 를 이용해야 한다는 사실이다. 
   const [today, setToday] = useState(new Date());
@@ -122,6 +122,14 @@ function Todotemplate() {
     return (()=> clearInterval(onArr))
   },[])
 
+  const submitHandler = event => {
+    event.preventDefault();
+    console.log(todoitems.length, title, innerTxt);
+    const newToto = {id:todoitem.length+1, state:false, title, innerTxt};
+    setTodoitem([...todoitem,newToto])
+      document.querySelector('#title').value = ''
+      document.querySelector('#txt').value = ''
+  }
 
   return (  
     <>
@@ -135,22 +143,26 @@ function Todotemplate() {
       {open && (
         <TodoCreateBox>
 
-<Form>
+<Form onSubmit={submitHandler}>
 <table>
-  <tr>
-    <td colSpan="2"> - 입력을 원치 않으시면, 왼쪽 상단에 있는 <span>빨간 연필</span>을 클릭해주세요.</td>
-  </tr>
+  <thead>
+    <tr>
+      <td colSpan="2"> - 입력을 원치 않으시면, 왼쪽 상단에 있는 <span>빨간 연필</span>을 클릭해주세요.</td>
+    </tr>
+  </thead>
+  <tbody>
   <tr>
     <td width="80" height="50px">할일의 주제</td>
-    <td><input type="text" placeholder='주제를 입력해주세요.'/></td>
+    <td><input required id="title" type="text" placeholder='주제를 입력해주세요.' onChange={(event) => setTitle(event.target.value)} /></td>
   </tr>
   <tr>
     <td>할일의 내용</td>
-    <td><input type="text" placeholder='내용을 입력해주세요.'/></td>
+    <td><input required id="txt" type="text" placeholder='내용을 입력해주세요.' onChange={(event) => setInnerTxt(event.target.value)}/></td>
   </tr>
   <tr>
-    <td colSpan="2"><input className='submit' type="submit" value="제출하기"/></td>
+    <td colSpan="2"><input  className='submit' type="submit" value="제출하기"/></td>
   </tr>
+  </tbody>
 </table>
 </Form>
         </TodoCreateBox>

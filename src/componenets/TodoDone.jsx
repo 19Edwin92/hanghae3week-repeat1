@@ -20,10 +20,6 @@ function TodoDone() {
   return (
     <TodoDoneBox>
           <p>Edwin의 완료 목록</p>
-          <Form>
-          <input type="text" placeholder='주제를 입력해주세요.'/>
-          <input type="text" placeholder='주제를 입력해주세요.'/>
-          </Form>
     </TodoDoneBox>
   )
 }
