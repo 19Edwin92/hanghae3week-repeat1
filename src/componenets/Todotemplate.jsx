@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import styled, {css} from 'styled-components';
 import { FaPencilAlt } from 'react-icons/fa';
+import TodoLists from './TodoLists';
+import TodoDone from './TodoDone';
 
 const TodoCreate = styled.div`
-  background: #AFCFEF;
+  background: #75B2EF;
   &:hover {
     background: #C2D8EF;
   }
   &:active {
-    background: #89BCEF;
+    background: #1481EF;
   }
   z-index: 5;
   cursor: pointer;
@@ -77,28 +79,40 @@ const TodoCreateBox = styled.div`
 
 const Form = styled.form`
   width: 90%;
-  padding : 20px;
   line-height: 2em;
 
-  table {
-    width:100%;
-  }
   input {
-    width:95%;
+    width:100%;
     height:30px;
   }
+  input[class='submit'] {
+    width:101%
+  }
+
   span {
     color:red;
   }
-`
 
+  table {
+    margin: 0;
+    padding:15px;
+    width:100%;
+  }
+`
 
 function Todotemplate() {
   const [open, setOpen] = useState(false);
   const onToggle = () => setOpen(!open);
 
-  // 오늘안 사실을 리액트에서는 시간도 useState 를 이용해야 한다는 사실이다. 
+  const todoitems = [
+    {id:1, state:false, title:"리액트 공부하기(1)", innerTxt:"리액트 기초를 공부해봅시다."},
+    {id:2, state:false, title:"리액트 공부하기(2)", innerTxt:"리액트 컴포넌트를 공부해봅시다."},
+    {id:3, state:false, title:"리액트 공부하기(3)", innerTxt:"리액트 프롭스를 공부해봅시다."},
+    {id:4, state:false, title:"리액트 공부하기(4)", innerTxt:"리액트 훅(1) useState를 공부해봅시다."},]
+  
+  const [todoitem, setTodoitem] = useState(todoitems)
 
+  // 오늘안 사실을 리액트에서는 시간도 useState 를 이용해야 한다는 사실이다. 
   const [today, setToday] = useState(new Date());
   useEffect(() => {
     const onArr = setInterval(() => {
@@ -106,6 +120,7 @@ function Todotemplate() {
     }, 1000);
     return (()=> clearInterval(onArr))
   },[])
+
 
   return (  
     <>
@@ -118,25 +133,29 @@ function Todotemplate() {
 
       {open && (
         <TodoCreateBox>
-          <Form>
-            <table>
-              <tr>
-                <td colSpan="2"> - 주제와 내용을 모두 입력하신 뒤 Enter를 입력해주세요. <br/>
-                                 - 입력을 원치 않으시면, 왼쪽 상단에 있는 <span>빨간 연필</span>을 클릭해주세요.</td>
-              </tr>
-              <tr>
-                <td width="80" height="50px">할일의 주제</td>
-                <td><input required type="text" placeholder='주제를 입력해주세요.'/></td>
-              </tr>
-              <tr>
-                <td>할일의 내용</td>
-                <td><input required type="text" placeholder='내용을 입력해주세요.'/></td>
-              </tr>
-            </table>
-          </Form>
 
+<Form>
+<table>
+  <tr>
+    <td colSpan="2"> - 입력을 원치 않으시면, 왼쪽 상단에 있는 <span>빨간 연필</span>을 클릭해주세요.</td>
+  </tr>
+  <tr>
+    <td width="80" height="50px">할일의 주제</td>
+    <td><input type="text" placeholder='주제를 입력해주세요.'/></td>
+  </tr>
+  <tr>
+    <td>할일의 내용</td>
+    <td><input type="text" placeholder='내용을 입력해주세요.'/></td>
+  </tr>
+  <tr>
+    <td colSpan="2"><input className='submit' type="submit" value="제출하기"/></td>
+  </tr>
+</table>
+</Form>
         </TodoCreateBox>
       )}
+      <TodoLists todoitem={todoitem} setTodoitem={setTodoitem}></TodoLists>
+      <TodoDone></TodoDone>
     </>
   )
 }
