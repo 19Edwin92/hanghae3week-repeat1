@@ -86,7 +86,8 @@ const Form = styled.form`
     height:30px;
   }
   input[class='submit'] {
-    width:101%
+    width:101%;
+    margin-top:5px;
   }
 
   span {
