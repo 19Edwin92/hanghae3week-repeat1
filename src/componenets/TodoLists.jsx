@@ -75,10 +75,11 @@ background-color:#DDABB1;
 ` 
 
 
-function TodoLists({todoitem,setTodoitem}) {
+function TodoLists({todoitem,setTodoitem, deleteTodo}) {
   function hey(event) {
     alert("hey")
   }
+
 
   return (
    <TodoListsBox>
@@ -93,9 +94,9 @@ function TodoLists({todoitem,setTodoitem}) {
               <a className='innerTxt'>{el.innerTxt}</a>
             </div>
             <div className='update'>
-              <UpdateIcon onClick={hey}><BsCalendarCheck/></UpdateIcon>
-              <DeleteIcon onClick={hey}><MdDelete/></DeleteIcon>
-             
+              <UpdateIcon id={el.id} onClick={hey}><BsCalendarCheck/></UpdateIcon>
+              <DeleteIcon id={el.id} onClick={deleteTodo}><MdDelete/></DeleteIcon>
+
             </div>
           </TodoitemBox>
         )

@@ -47,7 +47,7 @@ const Today = styled.div`
   font-family: 'GongGothicMedium';
   text-align: center;
   line-height:200px;
-  font-size:120px;
+  font-size:7.5em;
   margin: 30px;
   flex-grow:1;
   height:200px;
@@ -107,6 +107,9 @@ function Todotemplate() {
 
   const todoitems = [
     {id:1, state:false, title:"리액트 공부하기(1)", innerTxt:"리액트 기초를 공부해봅시다."},
+    {id:2, state:false, title:"리액트 공부하기(2)", innerTxt:"리액트 컴포넌트를 공부해봅시다."},
+    {id:3, state:false, title:"리액트 공부하기(3)", innerTxt:"리액트 프롭스를 공부해봅시다."},
+    {id:4, state:false, title:"리액트 공부하기(4)", innerTxt:"리액트 훅(1) useState를 공부해봅시다."},
   ]
   
   const [todoitem, setTodoitem] = useState(todoitems);
@@ -130,6 +133,11 @@ function Todotemplate() {
       document.querySelector('#title').value = ''
       document.querySelector('#txt').value = ''
   }
+
+  const deleteTodo = event => {
+    console.log("Delete!!")
+    console.log(event)
+  } 
 
   return (  
     <>
@@ -167,7 +175,7 @@ function Todotemplate() {
 </Form>
         </TodoCreateBox>
       )}
-      <TodoLists todoitem={todoitem} setTodoitem={setTodoitem}></TodoLists>
+      <TodoLists todoitem={todoitem} setTodoitem={setTodoitem} deleteTodo={deleteTodo}></TodoLists>
       <TodoDone></TodoDone>
     </>
   )
