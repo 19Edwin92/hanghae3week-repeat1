@@ -30,7 +30,6 @@ const Headers = styled.header`
   }
 `
 
-
 function Header() {
   return (
     <Headers>
