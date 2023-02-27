@@ -107,6 +107,7 @@ function Todotemplate() {
 
   const todoitems = [
     {id:0, state:false, title:"리액트 공부하기(1)", innerTxt:"리액트 기초를 공부해봅시다."},
+    {id:1677467847171, state:false, title:"리액트 공부하기(1)", innerTxt:"리액트 기초를 공부해봅시다."},
   ]
   
   const [todoitem, setTodoitem] = useState(todoitems);
@@ -124,8 +125,9 @@ function Todotemplate() {
 
   const submitHandler = event => {
     event.preventDefault();
-    const newToto = {id:todoitem.length, state:false, title, innerTxt};
-    console.log(todoitem.length, title, innerTxt);
+    const newToto = {id:Date.now(), state:false, title, innerTxt};
+    // console.log(Date.now(), title, innerTxt);
+    // 새로운 ID를 부여하는 부분에 있어서 length를 생성하면 발생되는 중첩오류들이 있음으로, 실시간 난수를 부여하였다.
     setTodoitem([...todoitem,newToto])
     
     
@@ -140,13 +142,15 @@ function Todotemplate() {
   } 
 
   const DoneTodo = doneId => {
-    todoitem[doneId].state = true
+    const findTodoitem = todoitem.filter((el) => el.id == doneId)
+    findTodoitem[0].state = true
     const newTodoitem = [...todoitem]
     setTodoitem(newTodoitem)
   }
 
   const CancelTodo = doneId => {
-    todoitem[doneId].state = false
+    const findTodoitem = todoitem.filter((el) => el.id == doneId)
+    findTodoitem[0].state = false
     const newTodoitem = [...todoitem]
     setTodoitem(newTodoitem)
   }
