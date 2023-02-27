@@ -75,12 +75,7 @@ background-color:#DDABB1;
 ` 
 
 
-function TodoLists({todoitem,setTodoitem, deleteTodo}) {
-  function hey(event) {
-    alert("hey")
-  }
-
-
+function TodoLists({todoitem,setTodoitem, deleteTodo, DoneTodo}) {
   return (
    <TodoListsBox>
     <p>Edwin의 할일 목록</p>
@@ -94,8 +89,9 @@ function TodoLists({todoitem,setTodoitem, deleteTodo}) {
               <a className='innerTxt'>{el.innerTxt}</a>
             </div>
             <div className='update'>
-              <UpdateIcon id={el.id} onClick={hey}><BsCalendarCheck/></UpdateIcon>
-              <DeleteIcon id={el.id} onClick={deleteTodo}><MdDelete/></DeleteIcon>
+              <UpdateIcon id={el.id} onClick={()=> DoneTodo(el.id)}><BsCalendarCheck/></UpdateIcon>
+              <DeleteIcon id={el.id} onClick={() => deleteTodo(el.id)}><MdDelete/></DeleteIcon>
+              
 
             </div>
           </TodoitemBox>

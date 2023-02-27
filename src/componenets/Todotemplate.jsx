@@ -106,10 +106,7 @@ function Todotemplate() {
   const onToggle = () => setOpen(!open);
 
   const todoitems = [
-    {id:1, state:false, title:"리액트 공부하기(1)", innerTxt:"리액트 기초를 공부해봅시다."},
-    {id:2, state:false, title:"리액트 공부하기(2)", innerTxt:"리액트 컴포넌트를 공부해봅시다."},
-    {id:3, state:false, title:"리액트 공부하기(3)", innerTxt:"리액트 프롭스를 공부해봅시다."},
-    {id:4, state:false, title:"리액트 공부하기(4)", innerTxt:"리액트 훅(1) useState를 공부해봅시다."},
+    {id:0, state:false, title:"리액트 공부하기(1)", innerTxt:"리액트 기초를 공부해봅시다."},
   ]
   
   const [todoitem, setTodoitem] = useState(todoitems);
@@ -127,17 +124,32 @@ function Todotemplate() {
 
   const submitHandler = event => {
     event.preventDefault();
-    console.log(todoitems.length, title, innerTxt);
-    const newToto = {id:todoitem.length+1, state:false, title, innerTxt};
+    const newToto = {id:todoitem.length, state:false, title, innerTxt};
+    console.log(todoitem.length, title, innerTxt);
     setTodoitem([...todoitem,newToto])
+    
+    
       document.querySelector('#title').value = ''
       document.querySelector('#txt').value = ''
+      // onToggle()
   }
 
-  const deleteTodo = event => {
-    console.log("Delete!!")
-    console.log(event)
+  const deleteTodo = deletId => {
+    const newTodoitem = todoitem.filter((el) => el.id !== deletId)
+    setTodoitem(newTodoitem)
   } 
+
+  const DoneTodo = doneId => {
+    todoitem[doneId].state = true
+    const newTodoitem = [...todoitem]
+    setTodoitem(newTodoitem)
+  }
+
+  const CancelTodo = doneId => {
+    todoitem[doneId].state = false
+    const newTodoitem = [...todoitem]
+    setTodoitem(newTodoitem)
+  }
 
   return (  
     <>
@@ -155,12 +167,12 @@ function Todotemplate() {
 <table>
   <thead>
     <tr>
-      <td colSpan="2"> - 입력을 원치 않으시면, 왼쪽 상단에 있는 <span>빨간 연필</span>을 클릭해주세요.</td>
+      <td colSpan="2"> - 더 이상의 할일 입력을 원하지 않으시면, 왼쪽 상단에 있는 <span>빨간 연필</span>을 클릭해주세요.</td>
     </tr>
   </thead>
   <tbody>
   <tr>
-    <td width="80" height="50px">할일의 주제</td>
+    <td width="80" height="50px">할일의 제목</td>
     <td><input required id="title" type="text" placeholder='주제를 입력해주세요.' onChange={(event) => setTitle(event.target.value)} /></td>
   </tr>
   <tr>
@@ -175,8 +187,8 @@ function Todotemplate() {
 </Form>
         </TodoCreateBox>
       )}
-      <TodoLists todoitem={todoitem} setTodoitem={setTodoitem} deleteTodo={deleteTodo}></TodoLists>
-      <TodoDone></TodoDone>
+      <TodoLists todoitem={todoitem} setTodoitem={setTodoitem} deleteTodo={deleteTodo} DoneTodo={DoneTodo}></TodoLists>
+      <TodoDone todoitem={todoitem} setTodoitem={setTodoitem} deleteTodo={deleteTodo} CancelTodo={CancelTodo}></TodoDone>
     </>
   )
 }
