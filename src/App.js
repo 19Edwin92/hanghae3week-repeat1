@@ -23,13 +23,20 @@ const GlobalStyle = createGlobalStyle`
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
   body {
     background: #e9ecef;
   }
 `
 const LayOut = styled.div`
   max-width: 1200px;
-  min-whith: 800px;
+  min-width: 800px;
   margin: 0 auto;
 `
 function App() {

@@ -133,6 +133,7 @@ function Todotemplate() {
     
       document.querySelector('#title').value = ''
       document.querySelector('#txt').value = ''
+      alert("작성이 완료되었습니다.")
       // onToggle()
   }
 
