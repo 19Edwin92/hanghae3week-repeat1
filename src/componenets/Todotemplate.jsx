@@ -142,14 +142,14 @@ function Todotemplate() {
   } 
 
   const DoneTodo = doneId => {
-    const findTodoitem = todoitem.filter((el) => el.id == doneId)
+    const findTodoitem = todoitem.filter((el) => el.id === doneId)
     findTodoitem[0].state = true
     const newTodoitem = [...todoitem]
     setTodoitem(newTodoitem)
   }
 
   const CancelTodo = doneId => {
-    const findTodoitem = todoitem.filter((el) => el.id == doneId)
+    const findTodoitem = todoitem.filter((el) => el.id === doneId)
     findTodoitem[0].state = false
     const newTodoitem = [...todoitem]
     setTodoitem(newTodoitem)

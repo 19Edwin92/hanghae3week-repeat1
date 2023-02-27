@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { MdDelete, MdFreeCancellation } from 'react-icons/md';
-import { BsCalendarCheck } from 'react-icons/bs';
 
 const TodoDoneBox = styled.div`
   margin: 10px auto;
@@ -18,7 +17,8 @@ const TodoitemBox = styled.div`
   min-height:50px;
   margin: 5px auto;
   border-radius:10px;
-  background-color:#D8D9D9;
+  background-color:#3D3E3E;
+  color:#D8D9D9;
   padding: 10px;
   display:grid;
   grid-template-columns: 1fr 150px;
@@ -48,12 +48,13 @@ const UpdateIcon = styled.div`
   font-size:25px;
   border-radius:50%;
   text-align:center;
-  background-color:#B2DDAB;
+  background-color:#5F8A59;
   &:hover {
     background-color:#D1DDCF;
+    color:black;
   }
   &:active {
-    background-color:#5F8A59;
+    background-color:#B2DDAB;
   }
 ` 
 
@@ -64,20 +65,22 @@ line-height:50px;
 font-size:25px;
 border-radius:50%;
 text-align:center;
-background-color:#DDABB1;
+background-color:#DD8791;
 &:hover {
   background-color:#F5E7E8;
+  color:black;
 }
 &:active {
-  background-color:#DD8791;
+  background-color:#DDABB1;
 }
+
 ` 
 
 
 function TodoDone({todoitem,setTodoitem, deleteTodo, CancelTodo}) {
   return (
     <TodoDoneBox>
-         <p>Edwin의 할일 목록</p>
+         <p>Edwin의 완료 목록</p>
     {todoitem.map(el => {
       if (el.state === true) {
         return (
