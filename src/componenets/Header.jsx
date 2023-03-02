@@ -25,7 +25,7 @@ const Headers = styled.header`
 
   div:nth-child(3) {
     margin-right: 10px;
-    text-align:end
+    text-align:end;
     
   }
 `

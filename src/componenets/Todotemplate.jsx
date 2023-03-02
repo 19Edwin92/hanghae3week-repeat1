@@ -114,14 +114,6 @@ function Todotemplate() {
   const [title, setTitle] = useState('');
   const [innerTxt, setInnerTxt] = useState('');
 
-  // 오늘안 사실을 리액트에서는 시간도 useState 를 이용해야 한다는 사실이다. 
-  const [today, setToday] = useState(new Date());
-  useEffect(() => {
-    const onArr = setInterval(() => {
-      setToday(new Date())
-    }, 1000);
-    return (()=> clearInterval(onArr))
-  },[])
 
   const submitHandler = event => {
     event.preventDefault();
@@ -136,6 +128,16 @@ function Todotemplate() {
       alert("작성이 완료되었습니다.")
       // onToggle()
   }
+
+    // 오늘안 사실을 리액트에서는 시간도 useState 를 이용해야 한다는 사실이다. 
+    const [today, setToday] = useState(new Date());
+    useEffect(() => {
+      const onArr = setInterval(() => {
+        setToday(new Date())
+      }, 1000);
+      return (()=> clearInterval(onArr))
+    },[])
+  
 
   const deleteTodo = deletId => {
     const newTodoitem = todoitem.filter((el) => el.id !== deletId)
